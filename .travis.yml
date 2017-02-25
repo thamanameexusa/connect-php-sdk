@@ -9,4 +9,4 @@ php:
 before_install:
 - "composer install"
 script:
-- "vendor/bin/phpunit test"
+- "vendor/bin/phpunit tests  --colors=always --debug"
