@@ -16,17 +16,14 @@ require 'vendor/autoload.php';
 
 # Replace this value with your application's personal access token,
 # available from your application dashboard (https://connect.squareup.com/apps)
-$accessToken = 'REPLACE_ME';
-
-# The base URL for every Connect API request
-$connectHost = 'https://connect.squareup.com';
+$accessToken = 'sq0atp-p65JKVeVpIkWjxvxC05LnQ';
 
 # Standard HTTP headers for every Connect API request
 $requestHeaders = array (
   'Authorization' => 'Bearer ' . $accessToken,
   'Accept' => 'application/json',
   'Content-Type' => 'application/json'
-);
+  );
 
 # Helper function to convert cent-based money amounts to dollars and cents
 function formatMoney($money) {
@@ -35,78 +32,65 @@ function formatMoney($money) {
 
 # Obtains all of the business's location IDs. Each location has its own collection of payments.
 function getLocationIds() {
-  global $accessToken, $connectHost, $requestHeaders;
-  $requestPath = $connectHost . '/v1/me/locations';
-  $response = Unirest\Request::get($requestPath, $requestHeaders);
-  $locations = $response->body;
+  $api_instance = new SquareConnect\Api\LocationApi();
+  global $accessToken;
+  $locations = $api_instance->listLocations($accessToken);
   $locationIds = array();
 
   foreach ($locations as $location) {
-    $locationIds[] = $location->id;
+    $locationIds[] = $location->getId();
   }
 
   return $locationIds;
 }
 
 # Retrieves all of a merchant's payments from 2015
-function get2015Payments($location_ids) {
-  global $accessToken, $connectHost, $requestHeaders;
+function get2017Payments($location_ids) {
+  global $accessToken;
 
   # Restrict the request to the 2015 calendar year, eight hours behind UTC
   # Make sure to URL-encode all parameters
   $parameters = http_build_query(
   	array(
-  	  'begin_time' => '2015-01-01T00:00:00-08:00',
-  	  'end_time'   => '2016-01-01T00:00:00-08:00'
-  	)
-  );
+     'begin_time' => '2017-01-01T00:00:00-08:00',
+     'end_time'   => '2018-01-01T00:00:00-08:00'
+     )
+    );
 
   $payments = array();
 
   foreach ($location_ids as $location_id) {
-    $requestPath = $connectHost . '/v1/' . $location_id . '/payments?' . $parameters;
-    $moreResults = true;
 
-    while ($moreResults) {
+    $transactionApi = new SquareConnect\Api\TransactionApi();
+
+    $payments = $transactionApi->listTransactions($accessToken, $location_id, $begin_time, $end_time, null,null)->getTransactions();
+
+    $cursor = $transactionApi->getCursor();
+
+    while ($cursor) {
 
       # Send a GET request to the List Payments endpoint
-      $response = Unirest\Request::get($requestPath, $requestHeaders);
+     $morePayments = $transactionApi->listTransactions($accessToken, $location_id, $begin_time, $end_time, null,$cursor);
 
       # Read the converted JSON body into the cumulative array of results
-      $payments = array_merge($payments, $response->body);
+     $payments = array_merge($payments, $morePayments->getTransactions());
 
-      # Check whether pagination information is included in a response header, indicating more results
-      if (array_key_exists('Link', $response->headers)) {
-        $paginationHeader = $response->headers['Link'];
-        if (strpos($paginationHeader, "rel='next'") !== false) {
-
-          # Extract the next batch URL from the header.
-          #
-          # Pagination headers have the following format:
-          # <https://connect.squareup.com/v1/MERCHANT_ID/payments?batch_token=BATCH_TOKEN>;rel='next'
-          # This line extracts the URL from the angle brackets surrounding it.
-          $requestPath = explode('>', explode('<', $paginationHeader)[1])[0];
-        } else {
-          $moreResults = false;
-        }
-      } else {
-        $moreResults = false;
-      }
-    }
+     $cursor = $morePayments->getCursor();
   }
+}
 
   # Remove potential duplicate values from the list of payments
-  $seenPaymentIds = array();
-  $uniquePayments = array();
-  foreach ($payments as $payment) {
-  	if (array_key_exists($payment->id, $seenPaymentIds)) {
-  	  continue;
-  	}
-  	$seenPaymentIds[$payment->id] = true;
-  	array_push($uniquePayments, $payment);
-  }
+$seenPaymentIds = array();
+$uniquePayments = array();
+foreach ($payments as $payment) {
+ if (array_key_exists($payment->id, $seenPaymentIds)) {
+   continue;
+ }
+ $seenPaymentIds[$payment->id] = true;
+ array_push($uniquePayments, $payment);
+}
 
-  return $uniquePayments;
+return $uniquePayments;
 }
 
 # Prints a sales report based on an array of payments
@@ -147,24 +131,22 @@ function printSalesReport($payments) {
 
 
   # Print a sales report similar to the Sales Summary in the merchant dashboard.
-  echo '<pre>';
-  echo '==SALES REPORT FOR 2015==' . '<br/>';
-  echo 'Gross Sales:       ' . formatMoney($basePurchases - $discounts) . '<br/>';
-  echo 'Discounts:         ' . formatMoney($discounts) . '<br/>';
-  echo 'Net Sales:         ' . formatMoney($basePurchases) . '<br/>';
-  echo 'Tax collected:     ' . formatMoney($taxes) . '<br/>';
-  echo 'Tips collected:    ' . formatMoney($tips) . '<br/>';
-  echo 'Total collected:   ' . formatMoney($basePurchases + $taxes + $tips) . '<br/>';
-  echo 'Fees:              ' . formatMoney($processingFees) . '<br/>';
-  echo 'Refunds:           ' . formatMoney($refunds) . '<br/>';
-  echo 'Fees returned:     ' . formatMoney($returned_processingFees) . '<br/>';
-  echo 'Net total:         ' . formatMoney($netMoney + $refunds + $returned_processingFees) . '<br/>';
-  echo '</pre>';
+  print '==SALES REPORT FOR 2015==';
+  print 'Gross Sales:       ' . formatMoney($basePurchases - $discounts) . '\n';
+  print 'Discounts:         ' . formatMoney($discounts);
+  print 'Net Sales:         ' . formatMoney($basePurchases);
+  print 'Tax collected:     ' . formatMoney($taxes);
+  print 'Tips collected:    ' . formatMoney($tips);
+  print 'Total collected:   ' . formatMoney($basePurchases + $taxes + $tips);
+  print 'Fees:              ' . formatMoney($processingFees);
+  print 'Refunds:           ' . formatMoney($refunds);
+  print 'Fees returned:     ' . formatMoney($returned_processingFees);
+  print 'Net total:         ' . formatMoney($netMoney + $refunds + $returned_processingFees);
 
 }
 
 # Call the functions defined above
-$payments = get2015Payments(getLocationIds());
+$payments = get2017Payments(getLocationIds());
 printSalesReport($payments);
 
 ?>
