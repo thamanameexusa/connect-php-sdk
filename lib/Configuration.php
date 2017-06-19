@@ -94,7 +94,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = "Square-Connect-PHP/2.1.0";
+    protected $userAgent = "Square-Connect-PHP/2.1.1";
 
     /**
      * Debug switch (default set to false)
