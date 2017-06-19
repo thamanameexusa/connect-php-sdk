@@ -9,7 +9,7 @@ namespace SquareConnect\Model;
 
 use \ArrayAccess;
 /**
- * CreateOrderRequestLineItem Class Doc Comment
+ * CreateOrderRequest Class Doc Comment
  *
  * @category Class
  * @package  SquareConnect
@@ -17,16 +17,16 @@ use \ArrayAccess;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link     https://squareup.com/developers
  */
-class CreateOrderRequestLineItem implements ArrayAccess
+class CreateOrderRequest implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization 
       * @var string[]
       */
     static $swaggerTypes = array(
-        'name' => 'string',
-        'quantity' => 'string',
-        'base_price_money' => '\SquareConnect\Model\Money',
+        'idempotency_key' => 'string',
+        'reference_id' => 'string',
+        'line_items' => '\SquareConnect\Model\CreateOrderRequestLineItem[]',
         'taxes' => '\SquareConnect\Model\CreateOrderRequestTax[]',
         'discounts' => '\SquareConnect\Model\CreateOrderRequestDiscount[]'
     );
@@ -36,9 +36,9 @@ class CreateOrderRequestLineItem implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'quantity' => 'quantity',
-        'base_price_money' => 'base_price_money',
+        'idempotency_key' => 'idempotency_key',
+        'reference_id' => 'reference_id',
+        'line_items' => 'line_items',
         'taxes' => 'taxes',
         'discounts' => 'discounts'
     );
@@ -48,9 +48,9 @@ class CreateOrderRequestLineItem implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'quantity' => 'setQuantity',
-        'base_price_money' => 'setBasePriceMoney',
+        'idempotency_key' => 'setIdempotencyKey',
+        'reference_id' => 'setReferenceId',
+        'line_items' => 'setLineItems',
         'taxes' => 'setTaxes',
         'discounts' => 'setDiscounts'
     );
@@ -60,35 +60,35 @@ class CreateOrderRequestLineItem implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'quantity' => 'getQuantity',
-        'base_price_money' => 'getBasePriceMoney',
+        'idempotency_key' => 'getIdempotencyKey',
+        'reference_id' => 'getReferenceId',
+        'line_items' => 'getLineItems',
         'taxes' => 'getTaxes',
         'discounts' => 'getDiscounts'
     );
   
     /**
-      * $name The name of the line item. This value cannot exceed 500 characters.
+      * $idempotency_key A value you specify that uniquely identifies this order among orders you've created.  If you're unsure whether a particular order was created successfully, you can reattempt it with the same idempotency key without worrying about creating duplicate orders.  See [Idempotency keys](#idempotencykeys) for more information.
       * @var string
       */
-    protected $name;
+    protected $idempotency_key;
     /**
-      * $quantity The quantity to purchase, as a string representation of a number. Currently, only integer values are supported.
+      * $reference_id An optional ID you can associate with the order for your own purposes (such as to associate the order with an entity ID in your own database).  This value cannot exceed 40 characters.
       * @var string
       */
-    protected $quantity;
+    protected $reference_id;
     /**
-      * $base_price_money The base price for a single unit of the line item's associated variation. If a line item represents a Custom Amount instead of a particular product, this field indicates that amount.
-      * @var \SquareConnect\Model\Money
+      * $line_items The line items to associate with this order.  Each line item represents a different product (or a custom monetary amount) to include in a purchase.
+      * @var \SquareConnect\Model\CreateOrderRequestLineItem[]
       */
-    protected $base_price_money;
+    protected $line_items;
     /**
       * $taxes The taxes include the custom taxes.
       * @var \SquareConnect\Model\CreateOrderRequestTax[]
       */
     protected $taxes;
     /**
-      * $discounts The discounts include the custom discounts.
+      * $discounts The discounts include the custom discounts .
       * @var \SquareConnect\Model\CreateOrderRequestDiscount[]
       */
     protected $discounts;
@@ -100,20 +100,20 @@ class CreateOrderRequestLineItem implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["name"])) {
-              $this->name = $data["name"];
+            if (isset($data["idempotency_key"])) {
+              $this->idempotency_key = $data["idempotency_key"];
             } else {
-              $this->name = null;
+              $this->idempotency_key = null;
             }
-            if (isset($data["quantity"])) {
-              $this->quantity = $data["quantity"];
+            if (isset($data["reference_id"])) {
+              $this->reference_id = $data["reference_id"];
             } else {
-              $this->quantity = null;
+              $this->reference_id = null;
             }
-            if (isset($data["base_price_money"])) {
-              $this->base_price_money = $data["base_price_money"];
+            if (isset($data["line_items"])) {
+              $this->line_items = $data["line_items"];
             } else {
-              $this->base_price_money = null;
+              $this->line_items = null;
             }
             if (isset($data["taxes"])) {
               $this->taxes = $data["taxes"];
@@ -128,60 +128,60 @@ class CreateOrderRequestLineItem implements ArrayAccess
         }
     }
     /**
-     * Gets name
+     * Gets idempotency_key
      * @return string
      */
-    public function getName()
+    public function getIdempotencyKey()
     {
-        return $this->name;
+        return $this->idempotency_key;
     }
   
     /**
-     * Sets name
-     * @param string $name The name of the line item. This value cannot exceed 500 characters.
+     * Sets idempotency_key
+     * @param string $idempotency_key A value you specify that uniquely identifies this order among orders you've created.  If you're unsure whether a particular order was created successfully, you can reattempt it with the same idempotency key without worrying about creating duplicate orders.  See [Idempotency keys](#idempotencykeys) for more information.
      * @return $this
      */
-    public function setName($name)
+    public function setIdempotencyKey($idempotency_key)
     {
-        $this->name = $name;
+        $this->idempotency_key = $idempotency_key;
         return $this;
     }
     /**
-     * Gets quantity
+     * Gets reference_id
      * @return string
      */
-    public function getQuantity()
+    public function getReferenceId()
     {
-        return $this->quantity;
+        return $this->reference_id;
     }
   
     /**
-     * Sets quantity
-     * @param string $quantity The quantity to purchase, as a string representation of a number. Currently, only integer values are supported.
+     * Sets reference_id
+     * @param string $reference_id An optional ID you can associate with the order for your own purposes (such as to associate the order with an entity ID in your own database).  This value cannot exceed 40 characters.
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setReferenceId($reference_id)
     {
-        $this->quantity = $quantity;
+        $this->reference_id = $reference_id;
         return $this;
     }
     /**
-     * Gets base_price_money
-     * @return \SquareConnect\Model\Money
+     * Gets line_items
+     * @return \SquareConnect\Model\CreateOrderRequestLineItem[]
      */
-    public function getBasePriceMoney()
+    public function getLineItems()
     {
-        return $this->base_price_money;
+        return $this->line_items;
     }
   
     /**
-     * Sets base_price_money
-     * @param \SquareConnect\Model\Money $base_price_money The base price for a single unit of the line item's associated variation. If a line item represents a Custom Amount instead of a particular product, this field indicates that amount.
+     * Sets line_items
+     * @param \SquareConnect\Model\CreateOrderRequestLineItem[] $line_items The line items to associate with this order.  Each line item represents a different product (or a custom monetary amount) to include in a purchase.
      * @return $this
      */
-    public function setBasePriceMoney($base_price_money)
+    public function setLineItems($line_items)
     {
-        $this->base_price_money = $base_price_money;
+        $this->line_items = $line_items;
         return $this;
     }
     /**
@@ -214,7 +214,7 @@ class CreateOrderRequestLineItem implements ArrayAccess
   
     /**
      * Sets discounts
-     * @param \SquareConnect\Model\CreateOrderRequestDiscount[] $discounts The discounts include the custom discounts.
+     * @param \SquareConnect\Model\CreateOrderRequestDiscount[] $discounts The discounts include the custom discounts .
      * @return $this
      */
     public function setDiscounts($discounts)

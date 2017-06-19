@@ -27,7 +27,11 @@ class OrderLineItem implements ArrayAccess
         'id' => 'string',
         'name' => 'string',
         'quantity' => 'string',
+        'taxes' => '\SquareConnect\Model\OrderLineItemTax[]',
+        'discounts' => '\SquareConnect\Model\OrderLineItemDiscount[]',
         'base_price_money' => '\SquareConnect\Model\Money',
+        'total_tax_money' => '\SquareConnect\Model\Money',
+        'total_discount_money' => '\SquareConnect\Model\Money',
         'total_money' => '\SquareConnect\Model\Money'
     );
   
@@ -39,7 +43,11 @@ class OrderLineItem implements ArrayAccess
         'id' => 'id',
         'name' => 'name',
         'quantity' => 'quantity',
+        'taxes' => 'taxes',
+        'discounts' => 'discounts',
         'base_price_money' => 'base_price_money',
+        'total_tax_money' => 'total_tax_money',
+        'total_discount_money' => 'total_discount_money',
         'total_money' => 'total_money'
     );
   
@@ -51,7 +59,11 @@ class OrderLineItem implements ArrayAccess
         'id' => 'setId',
         'name' => 'setName',
         'quantity' => 'setQuantity',
+        'taxes' => 'setTaxes',
+        'discounts' => 'setDiscounts',
         'base_price_money' => 'setBasePriceMoney',
+        'total_tax_money' => 'setTotalTaxMoney',
+        'total_discount_money' => 'setTotalDiscountMoney',
         'total_money' => 'setTotalMoney'
     );
   
@@ -63,7 +75,11 @@ class OrderLineItem implements ArrayAccess
         'id' => 'getId',
         'name' => 'getName',
         'quantity' => 'getQuantity',
+        'taxes' => 'getTaxes',
+        'discounts' => 'getDiscounts',
         'base_price_money' => 'getBasePriceMoney',
+        'total_tax_money' => 'getTotalTaxMoney',
+        'total_discount_money' => 'getTotalDiscountMoney',
         'total_money' => 'getTotalMoney'
     );
   
@@ -83,10 +99,30 @@ class OrderLineItem implements ArrayAccess
       */
     protected $quantity;
     /**
-      * $base_price_money The base price for a single unit of the line item's associated variation.  If a line item represents a Custom Amount instead of a particular product, this field indicates that amount.
+      * $taxes The taxes applied to this line item.
+      * @var \SquareConnect\Model\OrderLineItemTax[]
+      */
+    protected $taxes;
+    /**
+      * $discounts The discounts applied to this line item.
+      * @var \SquareConnect\Model\OrderLineItemDiscount[]
+      */
+    protected $discounts;
+    /**
+      * $base_price_money The base price for a single unit of the line item.
       * @var \SquareConnect\Model\Money
       */
     protected $base_price_money;
+    /**
+      * $total_tax_money The total tax amount of money to collect for the line item.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $total_tax_money;
+    /**
+      * $total_discount_money The total discount amount of money to collect for the line item.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $total_discount_money;
     /**
       * $total_money The total amount of money to collect for this line item.
       * @var \SquareConnect\Model\Money
@@ -115,10 +151,30 @@ class OrderLineItem implements ArrayAccess
             } else {
               $this->quantity = null;
             }
+            if (isset($data["taxes"])) {
+              $this->taxes = $data["taxes"];
+            } else {
+              $this->taxes = null;
+            }
+            if (isset($data["discounts"])) {
+              $this->discounts = $data["discounts"];
+            } else {
+              $this->discounts = null;
+            }
             if (isset($data["base_price_money"])) {
               $this->base_price_money = $data["base_price_money"];
             } else {
               $this->base_price_money = null;
+            }
+            if (isset($data["total_tax_money"])) {
+              $this->total_tax_money = $data["total_tax_money"];
+            } else {
+              $this->total_tax_money = null;
+            }
+            if (isset($data["total_discount_money"])) {
+              $this->total_discount_money = $data["total_discount_money"];
+            } else {
+              $this->total_discount_money = null;
             }
             if (isset($data["total_money"])) {
               $this->total_money = $data["total_money"];
@@ -185,6 +241,44 @@ class OrderLineItem implements ArrayAccess
         return $this;
     }
     /**
+     * Gets taxes
+     * @return \SquareConnect\Model\OrderLineItemTax[]
+     */
+    public function getTaxes()
+    {
+        return $this->taxes;
+    }
+  
+    /**
+     * Sets taxes
+     * @param \SquareConnect\Model\OrderLineItemTax[] $taxes The taxes applied to this line item.
+     * @return $this
+     */
+    public function setTaxes($taxes)
+    {
+        $this->taxes = $taxes;
+        return $this;
+    }
+    /**
+     * Gets discounts
+     * @return \SquareConnect\Model\OrderLineItemDiscount[]
+     */
+    public function getDiscounts()
+    {
+        return $this->discounts;
+    }
+  
+    /**
+     * Sets discounts
+     * @param \SquareConnect\Model\OrderLineItemDiscount[] $discounts The discounts applied to this line item.
+     * @return $this
+     */
+    public function setDiscounts($discounts)
+    {
+        $this->discounts = $discounts;
+        return $this;
+    }
+    /**
      * Gets base_price_money
      * @return \SquareConnect\Model\Money
      */
@@ -195,12 +289,50 @@ class OrderLineItem implements ArrayAccess
   
     /**
      * Sets base_price_money
-     * @param \SquareConnect\Model\Money $base_price_money The base price for a single unit of the line item's associated variation.  If a line item represents a Custom Amount instead of a particular product, this field indicates that amount.
+     * @param \SquareConnect\Model\Money $base_price_money The base price for a single unit of the line item.
      * @return $this
      */
     public function setBasePriceMoney($base_price_money)
     {
         $this->base_price_money = $base_price_money;
+        return $this;
+    }
+    /**
+     * Gets total_tax_money
+     * @return \SquareConnect\Model\Money
+     */
+    public function getTotalTaxMoney()
+    {
+        return $this->total_tax_money;
+    }
+  
+    /**
+     * Sets total_tax_money
+     * @param \SquareConnect\Model\Money $total_tax_money The total tax amount of money to collect for the line item.
+     * @return $this
+     */
+    public function setTotalTaxMoney($total_tax_money)
+    {
+        $this->total_tax_money = $total_tax_money;
+        return $this;
+    }
+    /**
+     * Gets total_discount_money
+     * @return \SquareConnect\Model\Money
+     */
+    public function getTotalDiscountMoney()
+    {
+        return $this->total_discount_money;
+    }
+  
+    /**
+     * Sets total_discount_money
+     * @param \SquareConnect\Model\Money $total_discount_money The total discount amount of money to collect for the line item.
+     * @return $this
+     */
+    public function setTotalDiscountMoney($total_discount_money)
+    {
+        $this->total_discount_money = $total_discount_money;
         return $this;
     }
     /**

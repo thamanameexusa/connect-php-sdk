@@ -28,7 +28,9 @@ class Order implements ArrayAccess
         'location_id' => 'string',
         'reference_id' => 'string',
         'line_items' => '\SquareConnect\Model\OrderLineItem[]',
-        'total_money' => '\SquareConnect\Model\Money'
+        'total_money' => '\SquareConnect\Model\Money',
+        'total_tax_money' => '\SquareConnect\Model\Money',
+        'total_discount_money' => '\SquareConnect\Model\Money'
     );
   
     /** 
@@ -40,7 +42,9 @@ class Order implements ArrayAccess
         'location_id' => 'location_id',
         'reference_id' => 'reference_id',
         'line_items' => 'line_items',
-        'total_money' => 'total_money'
+        'total_money' => 'total_money',
+        'total_tax_money' => 'total_tax_money',
+        'total_discount_money' => 'total_discount_money'
     );
   
     /**
@@ -52,7 +56,9 @@ class Order implements ArrayAccess
         'location_id' => 'setLocationId',
         'reference_id' => 'setReferenceId',
         'line_items' => 'setLineItems',
-        'total_money' => 'setTotalMoney'
+        'total_money' => 'setTotalMoney',
+        'total_tax_money' => 'setTotalTaxMoney',
+        'total_discount_money' => 'setTotalDiscountMoney'
     );
   
     /**
@@ -64,7 +70,9 @@ class Order implements ArrayAccess
         'location_id' => 'getLocationId',
         'reference_id' => 'getReferenceId',
         'line_items' => 'getLineItems',
-        'total_money' => 'getTotalMoney'
+        'total_money' => 'getTotalMoney',
+        'total_tax_money' => 'getTotalTaxMoney',
+        'total_discount_money' => 'getTotalDiscountMoney'
     );
   
     /**
@@ -92,6 +100,16 @@ class Order implements ArrayAccess
       * @var \SquareConnect\Model\Money
       */
     protected $total_money;
+    /**
+      * $total_tax_money The total tax amount of money to collect for the order.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $total_tax_money;
+    /**
+      * $total_discount_money The total discount amount of money to collect for the order.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $total_discount_money;
 
     /**
      * Constructor
@@ -124,6 +142,16 @@ class Order implements ArrayAccess
               $this->total_money = $data["total_money"];
             } else {
               $this->total_money = null;
+            }
+            if (isset($data["total_tax_money"])) {
+              $this->total_tax_money = $data["total_tax_money"];
+            } else {
+              $this->total_tax_money = null;
+            }
+            if (isset($data["total_discount_money"])) {
+              $this->total_discount_money = $data["total_discount_money"];
+            } else {
+              $this->total_discount_money = null;
             }
         }
     }
@@ -220,6 +248,44 @@ class Order implements ArrayAccess
     public function setTotalMoney($total_money)
     {
         $this->total_money = $total_money;
+        return $this;
+    }
+    /**
+     * Gets total_tax_money
+     * @return \SquareConnect\Model\Money
+     */
+    public function getTotalTaxMoney()
+    {
+        return $this->total_tax_money;
+    }
+  
+    /**
+     * Sets total_tax_money
+     * @param \SquareConnect\Model\Money $total_tax_money The total tax amount of money to collect for the order.
+     * @return $this
+     */
+    public function setTotalTaxMoney($total_tax_money)
+    {
+        $this->total_tax_money = $total_tax_money;
+        return $this;
+    }
+    /**
+     * Gets total_discount_money
+     * @return \SquareConnect\Model\Money
+     */
+    public function getTotalDiscountMoney()
+    {
+        return $this->total_discount_money;
+    }
+  
+    /**
+     * Sets total_discount_money
+     * @param \SquareConnect\Model\Money $total_discount_money The total discount amount of money to collect for the order.
+     * @return $this
+     */
+    public function setTotalDiscountMoney($total_discount_money)
+    {
+        $this->total_discount_money = $total_discount_money;
         return $this;
     }
     /**

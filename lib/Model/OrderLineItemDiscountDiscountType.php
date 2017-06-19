@@ -9,7 +9,7 @@ namespace SquareConnect\Model;
 
 use \ArrayAccess;
 /**
- * CreateOrderRequestOrder Class Doc Comment
+ * OrderLineItemDiscountDiscountType Class Doc Comment
  *
  * @category Class
  * @package  SquareConnect
@@ -17,15 +17,14 @@ use \ArrayAccess;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link     https://squareup.com/developers
  */
-class CreateOrderRequestOrder implements ArrayAccess
+class OrderLineItemDiscountDiscountType implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization 
       * @var string[]
       */
     static $swaggerTypes = array(
-        'reference_id' => 'string',
-        'line_items' => '\SquareConnect\Model\CreateOrderRequestLineItem[]'
+        
     );
   
     /** 
@@ -33,8 +32,7 @@ class CreateOrderRequestOrder implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'reference_id' => 'reference_id',
-        'line_items' => 'line_items'
+        
     );
   
     /**
@@ -42,8 +40,7 @@ class CreateOrderRequestOrder implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'reference_id' => 'setReferenceId',
-        'line_items' => 'setLineItems'
+        
     );
   
     /**
@@ -51,20 +48,9 @@ class CreateOrderRequestOrder implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'reference_id' => 'getReferenceId',
-        'line_items' => 'getLineItems'
+        
     );
   
-    /**
-      * $reference_id An optional ID you can associate with the order for your own purposes (such as to associate the order with an entity ID in your own database).  This value cannot exceed 40 characters.
-      * @var string
-      */
-    protected $reference_id;
-    /**
-      * $line_items The line items to associate with this order.  Each line item represents a different product (or a custom monetary amount) to include in a purchase.
-      * @var \SquareConnect\Model\CreateOrderRequestLineItem[]
-      */
-    protected $line_items;
 
     /**
      * Constructor
@@ -73,55 +59,7 @@ class CreateOrderRequestOrder implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["reference_id"])) {
-              $this->reference_id = $data["reference_id"];
-            } else {
-              $this->reference_id = null;
-            }
-            if (isset($data["line_items"])) {
-              $this->line_items = $data["line_items"];
-            } else {
-              $this->line_items = null;
-            }
         }
-    }
-    /**
-     * Gets reference_id
-     * @return string
-     */
-    public function getReferenceId()
-    {
-        return $this->reference_id;
-    }
-  
-    /**
-     * Sets reference_id
-     * @param string $reference_id An optional ID you can associate with the order for your own purposes (such as to associate the order with an entity ID in your own database).  This value cannot exceed 40 characters.
-     * @return $this
-     */
-    public function setReferenceId($reference_id)
-    {
-        $this->reference_id = $reference_id;
-        return $this;
-    }
-    /**
-     * Gets line_items
-     * @return \SquareConnect\Model\CreateOrderRequestLineItem[]
-     */
-    public function getLineItems()
-    {
-        return $this->line_items;
-    }
-  
-    /**
-     * Sets line_items
-     * @param \SquareConnect\Model\CreateOrderRequestLineItem[] $line_items The line items to associate with this order.  Each line item represents a different product (or a custom monetary amount) to include in a purchase.
-     * @return $this
-     */
-    public function setLineItems($line_items)
-    {
-        $this->line_items = $line_items;
-        return $this;
     }
     /**
      * Returns true if offset exists. False otherwise.

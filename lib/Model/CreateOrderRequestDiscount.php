@@ -9,7 +9,7 @@ namespace SquareConnect\Model;
 
 use \ArrayAccess;
 /**
- * CatalogV1Id Class Doc Comment
+ * CreateOrderRequestDiscount Class Doc Comment
  *
  * @category Class
  * @package  SquareConnect
@@ -17,15 +17,16 @@ use \ArrayAccess;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link     https://squareup.com/developers
  */
-class CatalogV1Id implements ArrayAccess
+class CreateOrderRequestDiscount implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization 
       * @var string[]
       */
     static $swaggerTypes = array(
-        'catalog_v1_id' => 'string',
-        'location_id' => 'string'
+        'name' => 'string',
+        'percentage' => 'string',
+        'amount_money' => '\SquareConnect\Model\Money'
     );
   
     /** 
@@ -33,8 +34,9 @@ class CatalogV1Id implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'catalog_v1_id' => 'catalog_v1_id',
-        'location_id' => 'location_id'
+        'name' => 'name',
+        'percentage' => 'percentage',
+        'amount_money' => 'amount_money'
     );
   
     /**
@@ -42,8 +44,9 @@ class CatalogV1Id implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'catalog_v1_id' => 'setCatalogV1Id',
-        'location_id' => 'setLocationId'
+        'name' => 'setName',
+        'percentage' => 'setPercentage',
+        'amount_money' => 'setAmountMoney'
     );
   
     /**
@@ -51,20 +54,26 @@ class CatalogV1Id implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'catalog_v1_id' => 'getCatalogV1Id',
-        'location_id' => 'getLocationId'
+        'name' => 'getName',
+        'percentage' => 'getPercentage',
+        'amount_money' => 'getAmountMoney'
     );
   
     /**
-      * $catalog_v1_id The ID for an object in Connect V1, if different from its Connect V2 ID.
+      * $name The discount's name.
       * @var string
       */
-    protected $catalog_v1_id;
+    protected $name;
     /**
-      * $location_id The ID of the [location][#type-location] this Connect V1 ID is associated with.
+      * $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%. This value range between 0.0 up to 100.0
       * @var string
       */
-    protected $location_id;
+    protected $percentage;
+    /**
+      * $amount_money The amount of the discount.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $amount_money;
 
     /**
      * Constructor
@@ -73,54 +82,78 @@ class CatalogV1Id implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["catalog_v1_id"])) {
-              $this->catalog_v1_id = $data["catalog_v1_id"];
+            if (isset($data["name"])) {
+              $this->name = $data["name"];
             } else {
-              $this->catalog_v1_id = null;
+              $this->name = null;
             }
-            if (isset($data["location_id"])) {
-              $this->location_id = $data["location_id"];
+            if (isset($data["percentage"])) {
+              $this->percentage = $data["percentage"];
             } else {
-              $this->location_id = null;
+              $this->percentage = null;
+            }
+            if (isset($data["amount_money"])) {
+              $this->amount_money = $data["amount_money"];
+            } else {
+              $this->amount_money = null;
             }
         }
     }
     /**
-     * Gets catalog_v1_id
+     * Gets name
      * @return string
      */
-    public function getCatalogV1Id()
+    public function getName()
     {
-        return $this->catalog_v1_id;
+        return $this->name;
     }
   
     /**
-     * Sets catalog_v1_id
-     * @param string $catalog_v1_id The ID for an object in Connect V1, if different from its Connect V2 ID.
+     * Sets name
+     * @param string $name The discount's name.
      * @return $this
      */
-    public function setCatalogV1Id($catalog_v1_id)
+    public function setName($name)
     {
-        $this->catalog_v1_id = $catalog_v1_id;
+        $this->name = $name;
         return $this;
     }
     /**
-     * Gets location_id
+     * Gets percentage
      * @return string
      */
-    public function getLocationId()
+    public function getPercentage()
     {
-        return $this->location_id;
+        return $this->percentage;
     }
   
     /**
-     * Sets location_id
-     * @param string $location_id The ID of the [location][#type-location] this Connect V1 ID is associated with.
+     * Sets percentage
+     * @param string $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%. This value range between 0.0 up to 100.0
      * @return $this
      */
-    public function setLocationId($location_id)
+    public function setPercentage($percentage)
     {
-        $this->location_id = $location_id;
+        $this->percentage = $percentage;
+        return $this;
+    }
+    /**
+     * Gets amount_money
+     * @return \SquareConnect\Model\Money
+     */
+    public function getAmountMoney()
+    {
+        return $this->amount_money;
+    }
+  
+    /**
+     * Sets amount_money
+     * @param \SquareConnect\Model\Money $amount_money The amount of the discount.
+     * @return $this
+     */
+    public function setAmountMoney($amount_money)
+    {
+        $this->amount_money = $amount_money;
         return $this;
     }
     /**
