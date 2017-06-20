@@ -1,18 +1,18 @@
 {
     "name": "square/connect",
     "version": "2.1.1",
-    "description": "",
+    "description": "PHP client library for the Square Connect v2 API",
     "keywords": [
         "swagger",
         "php",
         "sdk",
         "api"
     ],
-    "homepage": "http://swagger.io",
-    "license": "proprietary",
+    "homepage": "https://github.com/square/connect-php-sdk",
+    "license": "Apache v2",
     "authors": [
         {
-            "name": "Swagger and contributors",
+            "name": "Square, Inc.",
             "homepage": "https://github.com/swagger-api/swagger-codegen"
         }
     ],

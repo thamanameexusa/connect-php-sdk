@@ -5,8 +5,9 @@
  *
  * @category Class
  * @package  SquareConnect
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @author   Square Inc.
+ * @link     https://squareup.com/developers
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  */
 
 /**
@@ -38,8 +39,9 @@ use \SquareConnect\ObjectSerializer;
  *
  * @category Class
  * @package  SquareConnect
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @author   Square Inc.
+ * @link     https://squareup.com/developers
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  */
 class V1TransactionsApi
 {
