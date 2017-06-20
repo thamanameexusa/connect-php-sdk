@@ -13,7 +13,7 @@
     "authors": [
         {
             "name": "Square, Inc.",
-            "homepage": "https://github.com/swagger-api/swagger-codegen"
+            "homepage": "https://squareup.com/developers"
         }
     ],
     "require": {
