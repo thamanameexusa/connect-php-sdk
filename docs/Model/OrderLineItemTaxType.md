@@ -1,4 +1,4 @@
-# OrderLineItemDiscountDiscountType
+# OrderLineItemTaxType
 
 ## Properties
 Name | Type | Description | Notes

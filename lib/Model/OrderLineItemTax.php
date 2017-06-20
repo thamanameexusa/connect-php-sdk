@@ -74,7 +74,7 @@ class OrderLineItemTax implements ArrayAccess
       */
     protected $type;
     /**
-      * $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%.
+      * $percentage The percentage of the tax, as a string representation of a decimal number.  A value of `7.25` corresponds to a percentage of 7.25%.
       * @var string
       */
     protected $percentage;
@@ -162,7 +162,7 @@ class OrderLineItemTax implements ArrayAccess
   
     /**
      * Sets percentage
-     * @param string $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%.
+     * @param string $percentage The percentage of the tax, as a string representation of a decimal number.  A value of `7.25` corresponds to a percentage of 7.25%.
      * @return $this
      */
     public function setPercentage($percentage)

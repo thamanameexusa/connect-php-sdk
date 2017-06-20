@@ -24,7 +24,6 @@ class CreateOrderRequest implements ArrayAccess
       * @var string[]
       */
     static $swaggerTypes = array(
-        'idempotency_key' => 'string',
         'reference_id' => 'string',
         'line_items' => '\SquareConnect\Model\CreateOrderRequestLineItem[]',
         'taxes' => '\SquareConnect\Model\CreateOrderRequestTax[]',
@@ -36,7 +35,6 @@ class CreateOrderRequest implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'idempotency_key' => 'idempotency_key',
         'reference_id' => 'reference_id',
         'line_items' => 'line_items',
         'taxes' => 'taxes',
@@ -48,7 +46,6 @@ class CreateOrderRequest implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'idempotency_key' => 'setIdempotencyKey',
         'reference_id' => 'setReferenceId',
         'line_items' => 'setLineItems',
         'taxes' => 'setTaxes',
@@ -60,18 +57,12 @@ class CreateOrderRequest implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'idempotency_key' => 'getIdempotencyKey',
         'reference_id' => 'getReferenceId',
         'line_items' => 'getLineItems',
         'taxes' => 'getTaxes',
         'discounts' => 'getDiscounts'
     );
   
-    /**
-      * $idempotency_key A value you specify that uniquely identifies this order among orders you've created.  If you're unsure whether a particular order was created successfully, you can reattempt it with the same idempotency key without worrying about creating duplicate orders.  See [Idempotency keys](#idempotencykeys) for more information.
-      * @var string
-      */
-    protected $idempotency_key;
     /**
       * $reference_id An optional ID you can associate with the order for your own purposes (such as to associate the order with an entity ID in your own database).  This value cannot exceed 40 characters.
       * @var string
@@ -100,11 +91,6 @@ class CreateOrderRequest implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["idempotency_key"])) {
-              $this->idempotency_key = $data["idempotency_key"];
-            } else {
-              $this->idempotency_key = null;
-            }
             if (isset($data["reference_id"])) {
               $this->reference_id = $data["reference_id"];
             } else {
@@ -126,25 +112,6 @@ class CreateOrderRequest implements ArrayAccess
               $this->discounts = null;
             }
         }
-    }
-    /**
-     * Gets idempotency_key
-     * @return string
-     */
-    public function getIdempotencyKey()
-    {
-        return $this->idempotency_key;
-    }
-  
-    /**
-     * Sets idempotency_key
-     * @param string $idempotency_key A value you specify that uniquely identifies this order among orders you've created.  If you're unsure whether a particular order was created successfully, you can reattempt it with the same idempotency key without worrying about creating duplicate orders.  See [Idempotency keys](#idempotencykeys) for more information.
-     * @return $this
-     */
-    public function setIdempotencyKey($idempotency_key)
-    {
-        $this->idempotency_key = $idempotency_key;
-        return $this;
     }
     /**
      * Gets reference_id

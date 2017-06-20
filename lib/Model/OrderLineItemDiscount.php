@@ -77,12 +77,12 @@ class OrderLineItemDiscount implements ArrayAccess
       */
     protected $name;
     /**
-      * $type The type of the discount. If it is created by API, it would be either FIXED_PERCENTAGE or FIXED_AMOUNT as VARIABLE_* is not supported in API because the order is created at the time of sale and either percentage or amount has to be specified.
+      * $type The type of the discount. If it is created by API, it would be either FIXED_PERCENTAGE or FIXED_AMOUNT.  VARIABLE_* is not supported in API because the order is created at the time of sale and either percentage or amount has to be specified.
       * @var string
       */
     protected $type;
     /**
-      * $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%.
+      * $percentage The percentage of the tax, as a string representation of a decimal number.  A value of `7.25` corresponds to a percentage of 7.25%.
       * @var string
       */
     protected $percentage;
@@ -171,7 +171,7 @@ class OrderLineItemDiscount implements ArrayAccess
   
     /**
      * Sets type
-     * @param string $type The type of the discount. If it is created by API, it would be either FIXED_PERCENTAGE or FIXED_AMOUNT as VARIABLE_* is not supported in API because the order is created at the time of sale and either percentage or amount has to be specified.
+     * @param string $type The type of the discount. If it is created by API, it would be either FIXED_PERCENTAGE or FIXED_AMOUNT.  VARIABLE_* is not supported in API because the order is created at the time of sale and either percentage or amount has to be specified.
      * @return $this
      */
     public function setType($type)
@@ -190,7 +190,7 @@ class OrderLineItemDiscount implements ArrayAccess
   
     /**
      * Sets percentage
-     * @param string $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%.
+     * @param string $percentage The percentage of the tax, as a string representation of a decimal number.  A value of `7.25` corresponds to a percentage of 7.25%.
      * @return $this
      */
     public function setPercentage($percentage)

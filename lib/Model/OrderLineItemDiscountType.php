@@ -9,7 +9,7 @@ namespace SquareConnect\Model;
 
 use \ArrayAccess;
 /**
- * OrderLineItemTaxTaxType Class Doc Comment
+ * OrderLineItemDiscountType Class Doc Comment
  *
  * @category Class
  * @package  SquareConnect
@@ -17,7 +17,7 @@ use \ArrayAccess;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link     https://squareup.com/developers
  */
-class OrderLineItemTaxTaxType implements ArrayAccess
+class OrderLineItemDiscountType implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization 
